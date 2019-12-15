@@ -64,25 +64,6 @@ const bodyValidators = [
     }
 ];
 
-let commentLengthChecker = comment => {
-    if (!comment[0]) {
-        return false;
-    } else {
-        if (comment[0].length < 1 || comment[0].length > 200) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-};
-
-const commentValidator = [
-    {
-        validator: commentLengthChecker,
-        message: "Comments may not exceed 200 characters"
-    }
-];
-
 const blogSchema = new Schema({
     title: {
         type: String,
@@ -100,32 +81,7 @@ const blogSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now()
-    },
-    likes: {
-        type: Number,
-        default: 0
-    },
-    likedBy: {
-        type: Array
-    },
-    dislikes: {
-        type: Number,
-        default: 0
-    },
-    dislikedBy: {
-        type: Array
-    },
-    comments: [
-        {
-            comment: {
-                type: String,
-                validate: commentValidator
-            },
-            commentator: {
-                type: String
-            }
-        }
-    ]
+    }
 });
 
 module.exports = mongoose.model("Blog", blogSchema);
