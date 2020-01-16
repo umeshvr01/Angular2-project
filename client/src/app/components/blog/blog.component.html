@@ -45,61 +45,25 @@
 <!-- New Blog Form -->
 
 <div *ngIf="!newPost">
-  <div class="panel panel-primary">
+  <div class="panel panel-primary" *ngFor="let blog of blogPosts">
     <div class="panel-heading">
-      <h3 class="panel-title">Post Title</h3>
+      <h3 class="panel-title">{{ blog.title }}</h3>
     </div>
 
     <div class="panel-body">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores saepe amet neque ea nulla perspiciatis error sapiente reprehenderit hic dolorum quis id assumenda sed quidem laudantium reiciendis ipsam, harum exercitationem.
+      {{ blog.body }}
     </div>
 
     <!-- Footer start -->
     <div class="panel-footer">
-      <p><strong>Posted by:</strong>Umesh Verma</p>
-      <p><strong>Date:</strong>Nov 25, 2019</p>
-      <div>
-        <p><strong>Likes:</strong>25</p>
-        <p><strong>Dislikes:</strong>22</p>
-      </div>
-      <a href="#"><button type="button" name="button" class="btn btn-sm btn-info">Edit</button></a>
-      <a href="#"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
+      <p><strong>Posted by:</strong>{{ blog.createdBy }}</p>
+      <p><strong>Date:</strong>{{ blog.createdAt | date:'MMM dd, yyyy' }}</p>
 
-      <!-- Like dropdown -->
-      <div class="dropdown">
-        <button type="button" name="button" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-thumbs-up">&nbsp;</span>Likes: 21</button>
-        <div class="dropdown-content">
-          <a href="#">umesh</a>
-          <a href="#">dev</a>
-          <a href="#">gargi</a>
-        </div>
-      </div>
-
-      <!-- Dislike dropdown -->
-      <div class="dropdown">
-        <button type="button" name="button" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-thumbs-down">&nbsp;</span>Dislikes: 15</button>
-        <div class="dropdown-content">
-          <a href="#">umesh</a>
-          <a href="#">dev</a>
-          <a href="#">gargi</a>
-        </div>
-      </div>
+      <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy"><button type="button" name="button" class="btn btn-sm btn-info">Edit</button></a>
+      <a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.createdBy"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
 
     </div>
-    <!-- Footer end -->
-    
-    
-    <ul class="list-group">
-      <li class="list-group-item">
-      <button type="button" name="button" class="btn btn-danger" (click)="draftComment()">Post Comment</button>
-      <!-- <form action="">
-        <textarea name="comment" id="comment" cols="30" rows="10" class="form-control"></textarea>        
-        <button type="button" name="button" class="btn btn-info">Submit Post</button>        
-        <button type="button" name="button" class="btn btn-danger">Cancel</button>       
-      </form> -->
-      </li>
-    </ul>
-    
+    <!-- Footer end -->    
 
   </div>
 </div>

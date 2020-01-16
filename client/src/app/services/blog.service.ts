@@ -29,4 +29,24 @@ export class BlogService {
     this.createAuthenticationHeaders();
     return this.http.post(this.domain + '/blogs/newBlog', blog, this.options);
   }
+
+    getAllBlogs() {
+      this.createAuthenticationHeaders();
+      return this.http.get(this.domain + '/blogs/allBlogs', this.options);
+    }
+  
+    getSingleBlog(id) {
+      this.createAuthenticationHeaders();
+      return this.http.get(this.domain + '/blogs/singleBlog/' + id, this.options);
+    }
+  
+    editBlog(blog) {
+      this.createAuthenticationHeaders();
+      return this.http.put(this.domain + '/blogs/updateBlog/', blog, this.options);
+    }
+  
+    deleteBlog(id) {
+      this.createAuthenticationHeaders();
+      return this.http.delete(this.domain + '/blogs/deleteBlog/' + id, this.options);
+    }
 }
